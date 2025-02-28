@@ -103,7 +103,10 @@ std::string creaTagHTML(const std::string& tagName, const std::map<std::string, 
 
     // aggiunge gli attributi, se presenti
     for (const auto& attr : attributes) {
-        tag += " " + attr.first + "=\"" + attr.second + "\"";
+        tag += " " + attr.first;
+        if( attr.second != "" ) {
+          tag += "=\"" + attr.second + "\"";
+        }
     }
 
     // chiude il tag

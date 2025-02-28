@@ -41,6 +41,7 @@ std::string stampaCodiceStatoHTTP(int codice) {
 
     // se il codice non è valido, restituisce un messaggio di errore
     return "HTTP/1.1 400 Bad Request";
+
 }
 
 // invia il mime type
@@ -73,8 +74,29 @@ std::string stampaContentType(const std::string& mimeType) {
 
 }
 
+// invia il codice di stato HTTP
+std::string stampaDocType(const std::string& type) {
+
+    // mappa dei MIME types senza "Content-Type: "
+    std::unordered_map<std::string, std::string> docTypes = {
+        {"html5", "html"}
+    };
+
+    // controlla se il MIME type è presente nella mappa
+    auto it = docTypes .find(type);
+
+    // se il mime type esiste, restituisce la riga Content-Type corrispondente
+    if (it != docTypes .end()) {
+        return "<!DOCTYPE " + it->second + ">";
+    }
+
+    // valore di default
+    return "";
+
+}
+
 // crea un tag html
-std::string creaTagHTML(const std::string& tagName, const std::string& content, const std::map<std::string, std::string>& attributes) {
+std::string creaTagHTML(const std::string& tagName, const std::map<std::string, std::string>& attributes, const std::string& content) {
 
     // apertura del tag
     std::string tag = "<" + tagName;
@@ -84,8 +106,13 @@ std::string creaTagHTML(const std::string& tagName, const std::string& content, 
         tag += " " + attr.first + "=\"" + attr.second + "\"";
     }
 
-    // aggiunge il contenuto e chiude il tag
-    tag += ">" + content + "</" + tagName + ">";
+    // chiude il tag
+    tag += ">";
+
+    // se c'è contenuto lo aggiunge e chiude il tag
+    if( content != "" ) {
+      tag += content + "</" + tagName + ">";
+    }
 
     // valore di ritorno
     return tag;

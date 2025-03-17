@@ -1,10 +1,13 @@
 /**
  * libreria per lavorare con le API REST
  * 
- * v0.1.1 - 16/03/2025
+ * v0.1.2 - 16/03/2025
  * 
  * 
  */
+
+#ifndef REST_TOOLS_H
+#define REST_TOOLS_H
 
 /**
  * questa funzione fa una chiamata GET a un dato endpoint
@@ -22,7 +25,7 @@ void restGet(WiFiSSLClient connection, const char* api, int port, const char* se
       return;
     }
   
-    connection.print("GET " + String(service) + "HTTP/1.1\r\n" +
+    connection.print("GET " + String(service) + " HTTP/1.1\r\n" +
                      "Host: " + api + "\r\n" +
                      "Connection: close\r\n\r\n");
   
@@ -34,4 +37,5 @@ void restGet(WiFiSSLClient connection, const char* api, int port, const char* se
     }
   
   }
-  
+
+#endif

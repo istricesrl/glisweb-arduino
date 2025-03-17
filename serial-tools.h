@@ -1,12 +1,15 @@
 /**
  * libreria per la gestione ottimizzata della console seriale
  *
- * v0.0.1 - 16/03/2025
+ * v0.0.2 - 16/03/2025
  *
  *
  *
  *
  */
+
+#ifndef SERIAL_TOOLS_H
+#define SERIAL_TOOLS_H
 
 /**
  * questa funzione inizializza la comunicazione seriale
@@ -23,3 +26,5 @@ void initSerial() {
     Serial.println("connesso alla porta seriale");
 
 }
+
+#endif
